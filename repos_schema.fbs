@@ -1,0 +1,97 @@
+namespace Repos;
+
+table ReposList {
+    repos : [Repo];
+}
+
+table Repo {
+    id : long;
+    name : string;
+    full_name : string;
+    owner : User;
+    html_url : string;
+    description : string;
+    fork : bool;
+    url : string;
+    created_at : string;
+    updated_at : string;
+    pushed_at : string;
+    git_url : string;
+    ssh_url : string;
+    clone_url : string;
+    svn_url : string;
+    homepage : string;
+    size : long;
+    stargazers_count : int;
+    watchers_count : int;
+    language : string;
+    has_issues : bool;
+    has_downloads : bool;
+    has_wiki : bool;
+    has_pages : bool;
+    forks_count : int;
+    mirror_url : string;
+    open_issues_count : int;
+    forks : int;
+    open_issues : int;
+    watchers : int;
+    default_branch : string;
+    private : bool (deprecated);
+    forks_url : string (deprecated);
+    keys_url : string (deprecated);
+    collaborators_url : string (deprecated);
+    teams_url : string (deprecated);
+    hooks_url : string (deprecated);
+    issue_events_url : string (deprecated);
+    events_url : string (deprecated);
+    assignees_url : string (deprecated);
+    branches_url : string (deprecated);
+    tags_url : string (deprecated);
+    blobs_url : string (deprecated);
+    git_tags_url : string (deprecated);
+    git_refs_url : string (deprecated);
+    trees_url : string (deprecated);
+    statuses_url : string (deprecated);
+    languages_url : string (deprecated);
+    stargazers_url : string (deprecated);
+    contributors_url : string (deprecated);
+    subscribers_url : string (deprecated);
+    subscription_url : string (deprecated);
+    commits_url : string (deprecated);
+    git_commits_url : string (deprecated);
+    comments_url : string (deprecated);
+    issue_comment_url : string (deprecated);
+    contents_url : string (deprecated);
+    compare_url : string (deprecated);
+    merges_url : string (deprecated);
+    archive_url : string (deprecated);
+    downloads_url : string (deprecated);
+    issues_url : string (deprecated);
+    pulls_url : string (deprecated);
+    milestones_url : string (deprecated);
+    notifications_url : string (deprecated);
+    labels_url : string (deprecated);
+    releases_url : string (deprecated);
+}
+
+table User {
+    login : string;
+    id : long;
+    avatar_url : string;
+    gravatar_id : string;
+    url : string;
+    html_url : string;
+    followers_url : string;
+    following_url : string;
+    gists_url : string;
+    starred_url : string;
+    subscriptions_url : string;
+    organizations_url : string;
+    repos_url : string;
+    events_url : string;
+    received_events_url : string;
+    type : string;
+    site_admin : bool;
+}
+
+root_type ReposList;
