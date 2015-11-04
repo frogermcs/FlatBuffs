@@ -28,7 +28,7 @@ public class RawDataReader {
         this.context = context;
     }
 
-    public Observable<String> loadJsonString(@RawRes final int rawId) {
+    public Observable<String> loadString(@RawRes final int rawId) {
         return Observable.defer(new Func0<Observable<String>>() {
             @Override
             public Observable<String> call() {

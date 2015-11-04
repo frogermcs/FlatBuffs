@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.btnJson)
     public void onJsonClick() {
-        rawDataReader.loadJsonString(R.raw.repos_json).subscribe(new SimpleObserver<String>() {
+        rawDataReader.loadString(R.raw.repos_json).subscribe(new SimpleObserver<String>() {
             @Override
             public void onNext(String reposStr) {
                 parseReposListJson(reposStr);
