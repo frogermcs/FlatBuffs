@@ -12,12 +12,15 @@ import java.nio.ByteBuffer;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import frogermcs.io.flatbuffersparser.FlatBuffersParser;
 import frogermcs.io.flatbuffs.model.flat.Repo;
 import frogermcs.io.flatbuffs.model.flat.ReposList;
 import frogermcs.io.flatbuffs.model.json.RepoJson;
 import frogermcs.io.flatbuffs.model.json.ReposListJson;
 import frogermcs.io.flatbuffs.utils.RawDataReader;
 import frogermcs.io.flatbuffs.utils.SimpleObserver;
+import rx.Observable;
+import rx.functions.Func2;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,11 +28,15 @@ public class MainActivity extends AppCompatActivity {
     TextView tvFlat;
     @Bind(R.id.tvJson)
     TextView tvJson;
+    @Bind(R.id.tvJsonNative)
+    TextView tvJsonNative;
 
     private RawDataReader rawDataReader;
+    private FlatBuffersParser flatBuffersParser;
 
     private ReposListJson reposListJson;
     private ReposList reposListFlat;
+    private ReposList reposListFlatParsed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         rawDataReader = new RawDataReader(this);
+        flatBuffersParser = new FlatBuffersParser();
     }
 
     @OnClick(R.id.btnJson)
@@ -81,5 +89,34 @@ public class MainActivity extends AppCompatActivity {
         long endTime = System.currentTimeMillis() - startTime;
         tvFlat.setText("Elements: " + reposListFlat.reposLength() + ": load time: " + endTime + "ms");
 
+    }
+
+    @OnClick(R.id.btnJsonNative)
+    public void onJsonNativeClick() {
+        Observable.combineLatest(
+                rawDataReader.loadString(R.raw.repos_json),
+                rawDataReader.loadString(R.raw.repos_schema),
+                new Func2<String, String, Object>() {
+                    @Override
+                    public Object call(String json, String schema) {
+                        parseWithFlatBuffers(json, schema);
+                        return reposListFlatParsed;
+                    }
+                }
+        ).subscribe();
+    }
+
+    private void parseWithFlatBuffers(String json, String schema) {
+        long startTime = System.currentTimeMillis();
+
+        ByteBuffer byteBuffer = flatBuffersParser.parseJson(json, schema);
+        reposListFlatParsed = ReposList.getRootAsReposList(byteBuffer);
+        for (int i = 0; i < reposListFlatParsed.reposLength(); i++) {
+            Repo repos = reposListFlatParsed.repos(i);
+            Log.d("FlatBuffers", "Repo #" + i + ", id: " + repos.id());
+        }
+
+        long endTime = System.currentTimeMillis() - startTime;
+        tvJsonNative.setText("Elements: " + reposListFlatParsed.reposLength() + ": load time: " + endTime + "ms");
     }
 }

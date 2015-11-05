@@ -19,7 +19,7 @@
 
     <Button
         android:id="@+id/btnJson"
-        android:layout_width="200dp"
+        android:layout_width="240dp"
         android:layout_height="wrap_content"
         android:text="Parse JSON" />
 
@@ -29,8 +29,20 @@
         android:layout_height="wrap_content" />
 
     <Button
+        android:id="@+id/btnJsonNative"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Parse JSON (FlatBuffers)" />
+
+    <TextView
+        android:id="@+id/tvJsonNative"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
         android:id="@+id/btnFlatBuffers"
-        android:layout_width="200dp"
+        android:layout_width="240dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Use FlatBuffers" />

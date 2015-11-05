@@ -8,18 +8,14 @@ android {
     defaultConfig {
         applicationId "frogermcs.io.flatbuffs"
         minSdkVersion 15
-        targetSdkVersion 22
+        targetSdkVersion 23
         versionCode 1
         versionName "1.0"
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-        }
     }
 }
 
 dependencies {
+    compile project(':flatbuffersparser')
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:23.1.0'
     compile 'com.google.code.gson:gson:2.3.1'
