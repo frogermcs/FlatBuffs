@@ -13,9 +13,9 @@ model {
 
     android.ndk {
         moduleName = "FlatBuffersParser"
-        cppFlags = ['-std=c++11', '-fexceptions', '-Wall', '-Wno-literal-suffix']
-        cppFlags += "-I${file("src/main/jni/flatbufferslib")}".toString()
-        ldLibs = ["android", "log"]
+        cppFlags.addAll(['-std=c++11', '-fexceptions', '-Wall', '-Wno-literal-suffix'])
+        cppFlags.add("-I${file("src/main/jni/flatbufferslib")}".toString())
+        ldLibs.addAll(["android", "log"])
         stl = "gnustl_shared"
     }
 }
