@@ -1,11 +1,14 @@
 package frogermcs.io.flatbuffs.model.json;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Date;
 
 /**
  * Created by Miroslaw Stanek on 08.08.15.
  */
-public class RepoJson {
+public class RepoJson implements Parcelable {
     public long id;
     public String name;
     public String full_name;
@@ -161,4 +164,94 @@ public class RepoJson {
                 ", default_branch='" + default_branch + '\'' +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(this.id);
+        dest.writeString(this.name);
+        dest.writeString(this.full_name);
+        dest.writeParcelable(this.owner, flags);
+        dest.writeString(this.html_url);
+        dest.writeString(this.description);
+        dest.writeByte(fork ? (byte) 1 : (byte) 0);
+        dest.writeString(this.url);
+        dest.writeLong(created_at != null ? created_at.getTime() : -1);
+        dest.writeLong(updated_at != null ? updated_at.getTime() : -1);
+        dest.writeLong(pushed_at != null ? pushed_at.getTime() : -1);
+        dest.writeString(this.git_url);
+        dest.writeString(this.ssh_url);
+        dest.writeString(this.clone_url);
+        dest.writeString(this.svn_url);
+        dest.writeString(this.homepage);
+        dest.writeLong(this.size);
+        dest.writeInt(this.stargazers_count);
+        dest.writeInt(this.watchers_count);
+        dest.writeString(this.language);
+        dest.writeByte(has_issues ? (byte) 1 : (byte) 0);
+        dest.writeByte(has_downloads ? (byte) 1 : (byte) 0);
+        dest.writeByte(has_wiki ? (byte) 1 : (byte) 0);
+        dest.writeByte(has_pages ? (byte) 1 : (byte) 0);
+        dest.writeInt(this.forks_count);
+        dest.writeString(this.mirror_url);
+        dest.writeInt(this.open_issues_count);
+        dest.writeInt(this.forks);
+        dest.writeInt(this.open_issues);
+        dest.writeInt(this.watchers);
+        dest.writeString(this.default_branch);
+    }
+
+    public RepoJson() {
+    }
+
+    protected RepoJson(Parcel in) {
+        this.id = in.readLong();
+        this.name = in.readString();
+        this.full_name = in.readString();
+        this.owner = in.readParcelable(UserJson.class.getClassLoader());
+        this.html_url = in.readString();
+        this.description = in.readString();
+        this.fork = in.readByte() != 0;
+        this.url = in.readString();
+        long tmpCreated_at = in.readLong();
+        this.created_at = tmpCreated_at == -1 ? null : new Date(tmpCreated_at);
+        long tmpUpdated_at = in.readLong();
+        this.updated_at = tmpUpdated_at == -1 ? null : new Date(tmpUpdated_at);
+        long tmpPushed_at = in.readLong();
+        this.pushed_at = tmpPushed_at == -1 ? null : new Date(tmpPushed_at);
+        this.git_url = in.readString();
+        this.ssh_url = in.readString();
+        this.clone_url = in.readString();
+        this.svn_url = in.readString();
+        this.homepage = in.readString();
+        this.size = in.readLong();
+        this.stargazers_count = in.readInt();
+        this.watchers_count = in.readInt();
+        this.language = in.readString();
+        this.has_issues = in.readByte() != 0;
+        this.has_downloads = in.readByte() != 0;
+        this.has_wiki = in.readByte() != 0;
+        this.has_pages = in.readByte() != 0;
+        this.forks_count = in.readInt();
+        this.mirror_url = in.readString();
+        this.open_issues_count = in.readInt();
+        this.forks = in.readInt();
+        this.open_issues = in.readInt();
+        this.watchers = in.readInt();
+        this.default_branch = in.readString();
+    }
+
+    public static final Parcelable.Creator<RepoJson> CREATOR = new Parcelable.Creator<RepoJson>() {
+        public RepoJson createFromParcel(Parcel source) {
+            return new RepoJson(source);
+        }
+
+        public RepoJson[] newArray(int size) {
+            return new RepoJson[size];
+        }
+    };
 }

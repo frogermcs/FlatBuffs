@@ -38,8 +38,7 @@ public final class ReposList extends Table {
         return o != 0 ? __vector_len(o) : 0;
     }
 
-    public static int createReposList(FlatBufferBuilder builder,
-                                      int repos) {
+    public static int createReposList(FlatBufferBuilder builder, int repos) {
         builder.startObject(1);
         ReposList.addRepos(builder, repos);
         return ReposList.endReposList(builder);

@@ -38,6 +38,10 @@ public class MainActivity extends AppCompatActivity {
     private ReposList reposListFlat;
     private ReposList reposListFlatParsed;
 
+    //USED for allocation tracking
+//    private String reposStr;
+//    private byte[] bytes;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +49,21 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         rawDataReader = new RawDataReader(this);
         flatBuffersParser = new FlatBuffersParser();
+
+        //USED for allocation tracking
+//        rawDataReader.loadString(R.raw.repos_json).subscribe(new SimpleObserver<String>() {
+//            @Override
+//            public void onNext(String reposStr) {
+//                MainActivity.this.reposStr = reposStr;
+//            }
+//        });
+//
+//        rawDataReader.loadBytes(R.raw.repos_flat).subscribe(new SimpleObserver<byte[]>() {
+//            @Override
+//            public void onNext(byte[] bytes) {
+//                MainActivity.this.bytes = bytes;
+//            }
+//        });
     }
 
     @OnClick(R.id.btnJson)
@@ -55,6 +74,9 @@ public class MainActivity extends AppCompatActivity {
                 parseReposListJson(reposStr);
             }
         });
+
+        //USED for allocation tracking
+//        ReposListJson reposListJson = new Gson().fromJson(reposStr, ReposListJson.class);
     }
 
     private void parseReposListJson(String reposStr) {
@@ -76,6 +98,10 @@ public class MainActivity extends AppCompatActivity {
                 loadFlatBuffer(bytes);
             }
         });
+
+        //USED for allocation tracking
+//        ByteBuffer bb = ByteBuffer.wrap(bytes);
+//        ReposList reposListFlat = frogermcs.io.flatbuffs.model.flat.ReposList.getRootAsReposList(bb);
     }
 
     private void loadFlatBuffer(byte[] bytes) {
@@ -119,4 +145,26 @@ public class MainActivity extends AppCompatActivity {
         long endTime = System.currentTimeMillis() - startTime;
         tvJsonNative.setText("Elements: " + reposListFlatParsed.reposLength() + ": load time: " + endTime + "ms");
     }
+
+    @OnClick(R.id.btnOpenFlatReposListNormal)
+    public void openFlatReposListNormal() {
+        if (reposListFlat != null) {
+            ReposListActivity.openWithRepos(MainActivity.this, reposListFlat);
+        }
+    }
+
+    @OnClick(R.id.btnOpenFlatReposListOptimized)
+    public void openFlatReposListOptimized() {
+        if (reposListFlat != null) {
+            ReposListActivity.openWithReposOptimized(MainActivity.this, reposListFlat);
+        }
+    }
+
+    @OnClick(R.id.btnOpenJsonReposList)
+    public void openJsonReposList() {
+        if (reposListJson != null) {
+            ReposListActivity.openWithReposJson(MainActivity.this, reposListJson);
+        }
+    }
+
 }
