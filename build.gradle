@@ -3,8 +3,8 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.5.0'
-        classpath 'com.android.tools.build:gradle-experimental:0.4.0'
+        classpath 'com.android.tools.build:gradle:2.2.0-alpha6'
+        classpath 'com.android.tools.build:gradle-experimental:0.8.0-alpha6'
         classpath 'com.jakewharton.hugo:hugo-plugin:1.2.1'
     }
 }
@@ -13,4 +13,8 @@ allprojects {
     repositories {
         jcenter()
     }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
 }
