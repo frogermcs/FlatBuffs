@@ -84,6 +84,7 @@ public class OptimizedFlatRepositoriesListAdapter extends BaseAdapter {
 
         public void bindItemOnPosition(int itemPosition) {
             repository = reposList.repos(repository, itemPosition);
+            assert repository != null;
             bindRepositoryName(repository.getByteBuffer().array());
             bindRepositoryDescription(repository.getByteBuffer().array());
         }

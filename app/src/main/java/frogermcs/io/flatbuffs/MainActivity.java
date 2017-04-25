@@ -3,6 +3,8 @@ package frogermcs.io.flatbuffs;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -30,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     TextView tvJson;
     @Bind(R.id.tvJsonNative)
     TextView tvJsonNative;
+    @Bind(R.id.progressBar)
+    ProgressBar progressBar;
 
     private RawDataReader rawDataReader;
     private FlatBuffersParser flatBuffersParser;
@@ -68,6 +72,9 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.btnJson)
     public void onJsonClick() {
+        if (progressBar.getVisibility() == View.GONE){
+            progressBar.setVisibility(View.VISIBLE);
+        }
         rawDataReader.loadString(R.raw.repos_json).subscribe(new SimpleObserver<String>() {
             @Override
             public void onNext(String reposStr) {
@@ -92,6 +99,9 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.btnFlatBuffers)
     public void onFlatBuffersClick() {
+        if (progressBar.getVisibility() == View.GONE){
+            progressBar.setVisibility(View.VISIBLE);
+        }
         rawDataReader.loadBytes(R.raw.repos_flat).subscribe(new SimpleObserver<byte[]>() {
             @Override
             public void onNext(byte[] bytes) {
@@ -119,6 +129,9 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.btnJsonNative)
     public void onJsonNativeClick() {
+        if (progressBar.getVisibility() == View.GONE){
+            progressBar.setVisibility(View.VISIBLE);
+        }
         Observable.combineLatest(
                 rawDataReader.loadString(R.raw.repos_json),
                 rawDataReader.loadString(R.raw.repos_schema),

@@ -41,7 +41,7 @@ public class RawDataReader {
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
-    public String loadJsonStringBlocking(@RawRes int rawId) throws IOException {
+    private String loadJsonStringBlocking(@RawRes int rawId) throws IOException {
         InputStream is = context.getResources().openRawResource(rawId);
         Writer writer = new StringWriter();
         char[] buffer = new char[1024];
@@ -68,7 +68,7 @@ public class RawDataReader {
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
-    public byte[] loadBytesBlocking(@RawRes int rawId) throws IOException {
+    private byte[] loadBytesBlocking(@RawRes int rawId) throws IOException {
         final InputStream inputStream = context.getResources().openRawResource(rawId);
         final byte[] bytes = convertStreamToByteArray(inputStream);
         inputStream.close();
@@ -78,7 +78,7 @@ public class RawDataReader {
     private byte[] convertStreamToByteArray(InputStream is) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         byte[] buff = new byte[10240];
-        int i = Integer.MAX_VALUE;
+        int i;
         while ((i = is.read(buff, 0, buff.length)) > 0) {
             baos.write(buff, 0, i);
         }
