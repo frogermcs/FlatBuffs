@@ -70,5 +70,5 @@ public final class ReposList extends Table {
     public static void finishReposListBuffer(FlatBufferBuilder builder, int offset) {
         builder.finish(offset);
     }
-};
+}
 

@@ -11,35 +11,35 @@ import java.util.Date;
 public class RepoJson implements Parcelable {
     public long id;
     public String name;
-    public String full_name;
-    public UserJson owner;
-    public String html_url;
+    private String full_name;
+    private UserJson owner;
+    private String html_url;
     public String description;
-    public boolean fork;
-    public String url;
-    public Date created_at;
-    public Date updated_at;
-    public Date pushed_at;
-    public String git_url;
-    public String ssh_url;
-    public String clone_url;
-    public String svn_url;
-    public String homepage;
-    public long size;
-    public int stargazers_count;
-    public int watchers_count;
-    public String language;
-    public boolean has_issues;
-    public boolean has_downloads;
-    public boolean has_wiki;
-    public boolean has_pages;
-    public int forks_count;
-    public String mirror_url;
-    public int open_issues_count;
-    public int forks;
-    public int open_issues;
-    public int watchers;
-    public String default_branch;
+    private boolean fork;
+    private String url;
+    private Date created_at;
+    private Date updated_at;
+    private Date pushed_at;
+    private String git_url;
+    private String ssh_url;
+    private String clone_url;
+    private String svn_url;
+    private String homepage;
+    private long size;
+    private int stargazers_count;
+    private int watchers_count;
+    private String language;
+    private boolean has_issues;
+    private boolean has_downloads;
+    private boolean has_wiki;
+    private boolean has_pages;
+    private int forks_count;
+    private String mirror_url;
+    private int open_issues_count;
+    private int forks;
+    private int open_issues;
+    private int watchers;
+    private String default_branch;
 
     @Override
     public boolean equals(Object o) {
@@ -208,7 +208,7 @@ public class RepoJson implements Parcelable {
     public RepoJson() {
     }
 
-    protected RepoJson(Parcel in) {
+    private RepoJson(Parcel in) {
         this.id = in.readLong();
         this.name = in.readString();
         this.full_name = in.readString();

@@ -52,7 +52,6 @@ public static void openWithReposJson(Activity openingActivity, ReposListJson rep
     ListView lvRepositories;
 
     private ReposList reposList;
-    private ReposListJson reposListJson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +80,7 @@ public static void openWithReposJson(Activity openingActivity, ReposListJson rep
     }
 
     private void setupJsonAdapter() {
-        reposListJson = getIntent().getParcelableExtra(KEY_REPOS);
+        ReposListJson reposListJson = getIntent().getParcelableExtra(KEY_REPOS);
 
         JsonRepositoriesListAdapter repositoriesListAdapter = new JsonRepositoriesListAdapter(this);
         lvRepositories.setAdapter(repositoriesListAdapter);

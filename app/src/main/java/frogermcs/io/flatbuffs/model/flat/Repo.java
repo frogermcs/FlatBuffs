@@ -479,5 +479,5 @@ public final class Repo extends Table {
         int o = builder.endObject();
         return o;
     }
-};
+}
 

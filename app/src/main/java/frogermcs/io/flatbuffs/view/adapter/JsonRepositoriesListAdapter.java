@@ -10,7 +10,6 @@ import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import frogermcs.io.flatbuffs.R;
-import frogermcs.io.flatbuffs.model.flat.Repo;
 import frogermcs.io.flatbuffs.model.json.RepoJson;
 import frogermcs.io.flatbuffs.model.json.ReposListJson;
 

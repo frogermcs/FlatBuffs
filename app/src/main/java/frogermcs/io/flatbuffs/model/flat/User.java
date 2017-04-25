@@ -284,5 +284,5 @@ public final class User extends Table {
         int o = builder.endObject();
         return o;
     }
-};
+}
 
